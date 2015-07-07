@@ -1,0 +1,8 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="BaseTheme">
+        <item name="android:navigationBarColor">@color/stack_app_primary_dark</item>
+    </style>
+
+</resources>
