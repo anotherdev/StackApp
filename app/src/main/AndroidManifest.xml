@@ -1,0 +1,51 @@
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.anotherdev.stackapp">
+
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+
+    <application
+        android:allowBackup="true"
+        android:name=".app.StackApp"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_stack_app_launcher"
+        android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="517568085279c99992dfe6b218cca06b4904917c"/>
+
+        <!-- Activity -->
+
+        <activity
+            android:name=".app.HomeActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+            <!-- exported="true" to workaround Android activity-alias bug:
+                 https://code.google.com/p/android/issues/detail?id=82185 -->
+        </activity>
+
+        <activity-alias
+            android:name=".Hubii"
+            android:label="@string/app_name"
+            android:targetActivity=".app.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Service -->
+
+
+        <!-- Receiver -->
+
+
+        <!-- Provider -->
+
+    </application>
+
+</manifest>
