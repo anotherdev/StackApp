@@ -43,6 +43,7 @@ public class DetailActivity extends StackActivity {
         AnswerAdapter adapter = new AnswerAdapter(q, Lists.<Answer>newArrayList());
         mRecyclerView.setAdapter(adapter);
 
+        setTitle(q.getTitle());
         loadAnswers(q);
     }
 
