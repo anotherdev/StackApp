@@ -8,6 +8,7 @@
     <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/stack_app_primary</item>
         <item name="colorPrimaryDark">@color/stack_app_primary_dark</item>
+        <item name="colorControlHighlight">@color/stack_app_primary</item>
     </style>
 
 </resources>
