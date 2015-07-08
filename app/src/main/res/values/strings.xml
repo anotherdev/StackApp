@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Stack App</string>
+    <string name="loading_question">Loading Question</string>
 </resources>

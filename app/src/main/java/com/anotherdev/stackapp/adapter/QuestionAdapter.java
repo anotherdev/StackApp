@@ -12,6 +12,7 @@ import com.anotherdev.stackapp.R;
 import com.anotherdev.stackapp.api.stackexchange.Owner;
 import com.anotherdev.stackapp.api.stackexchange.Question;
 import com.anotherdev.stackapp.api.stackexchange.Questions;
+import com.anotherdev.stackapp.intent.DetailIntent;
 import com.anotherdev.stackapp.util.Dates;
 import com.bumptech.glide.Glide;
 
@@ -68,7 +69,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     private final View.OnClickListener mOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Context context = v.getContext();
             Question q = (Question) v.getTag();
+            DetailIntent intent = new DetailIntent(context);
+            context.startActivity(intent);
         }
     };
 

@@ -15,7 +15,7 @@ public abstract class StackIntent extends Intent {
         super(action);
     }
 
-    StackIntent(Context packageContext, Class<?> cls) {
-        super(packageContext, cls);
+    StackIntent(Context context, Class<?> cls) {
+        super(context, cls);
     }
 }
