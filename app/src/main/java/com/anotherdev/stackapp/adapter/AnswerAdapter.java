@@ -71,6 +71,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<ViewHolder> {
         if (vh instanceof QuestionHolder) {
             QuestionHolder qh = (QuestionHolder) vh;
             mQuestionAdapter.onBindViewHolder(qh, position);
+            qh.body.setText(mQuestion.getBody());
+            qh.body.setVisibility(View.VISIBLE);
+            qh.divider.setVisibility(View.VISIBLE);
         } else if (vh instanceof AnswerHolder) {
             AnswerHolder ah = (AnswerHolder) vh;
             final Answer a = mAnswers.get(position - 1);
@@ -85,11 +88,8 @@ public class AnswerAdapter extends RecyclerView.Adapter<ViewHolder> {
             ah.body.setText(a.getBody());
             ah.owner.setText(owner.getDisplayName());
             ah.timeAgo.setText(Dates.getTimeAgo(a.getLastActivityDate()));
+            ah.divider.setVisibility(View.VISIBLE);
         }
-
-        final boolean isLastPosition = position == (getItemCount() - 1);
-        View divider = ButterKnife.findById(vh.itemView, R.id.divider);
-        divider.setVisibility(isLastPosition ? View.GONE : View.VISIBLE);
     }
 
 

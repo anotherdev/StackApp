@@ -80,6 +80,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
         @Bind(R.id.question_owner_imageview) ImageView ownerImage;
         @Bind(R.id.question_title) TextView title;
+        @Bind(R.id.question_body) TextView body;
         @Bind(R.id.question_owner) TextView owner;
         @Bind(R.id.question_time_ago) TextView timeAgo;
         @Bind(R.id.divider) View divider;
