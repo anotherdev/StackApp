@@ -85,10 +85,11 @@ public class AnswerAdapter extends RecyclerView.Adapter<ViewHolder> {
             ah.body.setText(a.getBody());
             ah.owner.setText(owner.getDisplayName());
             ah.timeAgo.setText(Dates.getTimeAgo(a.getLastActivityDate()));
-
-            final boolean isLastPosition = position == (getItemCount() - 1);
-            ah.divider.setVisibility(isLastPosition ? View.GONE : View.VISIBLE);
         }
+
+        final boolean isLastPosition = position == (getItemCount() - 1);
+        View divider = ButterKnife.findById(vh.itemView, R.id.divider);
+        divider.setVisibility(isLastPosition ? View.GONE : View.VISIBLE);
     }
 
 
