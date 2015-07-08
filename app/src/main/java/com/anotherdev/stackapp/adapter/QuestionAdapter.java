@@ -1,15 +1,19 @@
 package com.anotherdev.stackapp.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anotherdev.stackapp.R;
+import com.anotherdev.stackapp.api.stackexchange.Owner;
 import com.anotherdev.stackapp.api.stackexchange.Question;
 import com.anotherdev.stackapp.api.stackexchange.Questions;
 import com.anotherdev.stackapp.util.Dates;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -42,9 +46,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     @Override
     public void onBindViewHolder(QuestionHolder holder, int position) {
         final Question q = mQuestions.get(position);
+        final Owner owner = q.getOwner();
+
+        Glide.with(holder.itemView.getContext())
+                .load(owner.getProfileImage())
+                .crossFade()
+                .into(holder.ownerImage);
 
         holder.title.setText(q.getTitle());
-        holder.owner.setText(q.getOwner().getDisplayName());
+        holder.owner.setText(owner.getDisplayName());
         holder.timeAgo.setText(Dates.getTimeAgo(q.getLastActivityDate()));
 
         final boolean isLastPosition = position == (getItemCount() - 1);
@@ -64,6 +74,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
     static class QuestionHolder extends RecyclerView.ViewHolder {
 
+        @Bind(R.id.question_owner_imageview) ImageView ownerImage;
         @Bind(R.id.question_title) TextView title;
         @Bind(R.id.question_owner) TextView owner;
         @Bind(R.id.question_time_ago) TextView timeAgo;

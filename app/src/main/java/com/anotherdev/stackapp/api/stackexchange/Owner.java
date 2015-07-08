@@ -1,5 +1,6 @@
 package com.anotherdev.stackapp.api.stackexchange;
 
+import com.anotherdev.stackapp.util.Htmls;
 import com.google.gson.annotations.SerializedName;
 
 public class Owner {
@@ -23,8 +24,8 @@ public class Owner {
         return profile_image;
     }
 
-    public String getDisplayName() {
-        return display_name;
+    public CharSequence getDisplayName() {
+        return Htmls.fromHtml(display_name);
     }
 
     public String getProfileUrl() {

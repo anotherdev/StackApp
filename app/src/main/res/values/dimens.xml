@@ -2,4 +2,5 @@
 <resources>
     <dimen name="default_spacing">8dp</dimen>
     <dimen name="default_half_spacing">4dp</dimen>
+    <dimen name="profile_image_size">64dp</dimen>
 </resources>
