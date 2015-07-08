@@ -9,7 +9,10 @@ import android.widget.TextView;
 
 import com.anotherdev.stackapp.R;
 import com.anotherdev.stackapp.api.stackexchange.Answer;
+import com.anotherdev.stackapp.api.stackexchange.Owner;
 import com.anotherdev.stackapp.api.stackexchange.Question;
+import com.anotherdev.stackapp.util.Dates;
+import com.bumptech.glide.Glide;
 
 import java.util.Collections;
 import java.util.List;
@@ -70,6 +73,21 @@ public class AnswerAdapter extends RecyclerView.Adapter<ViewHolder> {
             mQuestionAdapter.onBindViewHolder(qh, position);
         } else if (vh instanceof AnswerHolder) {
             AnswerHolder ah = (AnswerHolder) vh;
+            final Answer a = mAnswers.get(position - 1);
+            final Owner owner = a.getOwner();
+
+            Glide.with(ah.itemView.getContext())
+                    .load(owner.getProfileImage())
+                    .placeholder(R.drawable.ic_stack_app_launcher)
+                    .crossFade()
+                    .into(ah.ownerImage);
+
+            ah.body.setText(a.getBody());
+            ah.owner.setText(owner.getDisplayName());
+            ah.timeAgo.setText(Dates.getTimeAgo(a.getLastActivityDate()));
+
+            final boolean isLastPosition = position == (getItemCount() - 1);
+            ah.divider.setVisibility(isLastPosition ? View.GONE : View.VISIBLE);
         }
     }
 
