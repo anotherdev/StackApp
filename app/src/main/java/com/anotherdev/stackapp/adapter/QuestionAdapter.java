@@ -35,6 +35,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.view_question, parent, false);
+        view.setOnClickListener(mOnClick);
         return new QuestionHolder(view);
     }
 
@@ -48,7 +49,18 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
         final boolean isLastPosition = position == (getItemCount() - 1);
         holder.divider.setVisibility(isLastPosition ? View.GONE : View.VISIBLE);
+
+        holder.itemView.setTag(q);
     }
+
+
+    private final View.OnClickListener mOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Question q = (Question) v.getTag();
+        }
+    };
+
 
     static class QuestionHolder extends RecyclerView.ViewHolder {
 
