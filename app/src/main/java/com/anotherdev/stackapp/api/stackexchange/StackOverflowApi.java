@@ -1,6 +1,7 @@
 package com.anotherdev.stackapp.api.stackexchange;
 
 import retrofit.http.GET;
+import retrofit.http.Query;
 import rx.Observable;
 
 public interface StackOverflowApi {
@@ -10,4 +11,7 @@ public interface StackOverflowApi {
 
     @GET("/questions?order=desc&sort=activity&site=stackoverflow")
     Observable<Questions> questions();
+
+    @GET("/search?order=desc&sort=activity&site=stackoverflow")
+    Observable<Questions> search(@Query("intitle") String text);
 }
