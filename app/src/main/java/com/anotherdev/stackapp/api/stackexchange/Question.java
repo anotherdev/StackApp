@@ -59,4 +59,8 @@ public class Question {
     public CharSequence getTitle() {
         return Htmls.fromHtml(title);
     }
+
+    public CharSequence getBody() {
+        return Htmls.fromHtml(body);
+    }
 }
