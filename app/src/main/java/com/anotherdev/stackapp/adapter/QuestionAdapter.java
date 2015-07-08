@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.anotherdev.stackapp.R;
 import com.anotherdev.stackapp.api.stackexchange.Owner;
 import com.anotherdev.stackapp.api.stackexchange.Question;
-import com.anotherdev.stackapp.api.stackexchange.Questions;
 import com.anotherdev.stackapp.intent.DetailIntent;
 import com.anotherdev.stackapp.util.Dates;
 import com.bumptech.glide.Glide;
@@ -26,8 +25,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     private final List<Question> mQuestions;
 
 
-    public QuestionAdapter(Questions questions) {
-        mQuestions = questions.get();
+    public QuestionAdapter(List<Question> questions) {
+        mQuestions = questions;
     }
 
     @Override
@@ -71,7 +70,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         public void onClick(View v) {
             Context context = v.getContext();
             Question q = (Question) v.getTag();
-            DetailIntent intent = new DetailIntent(context);
+            DetailIntent intent = new DetailIntent(context, q);
             context.startActivity(intent);
         }
     };

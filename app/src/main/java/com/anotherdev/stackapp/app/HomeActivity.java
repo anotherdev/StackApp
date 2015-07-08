@@ -80,7 +80,7 @@ public class HomeActivity extends StackActivity {
     }
 
     private void updateQuestions(Questions questions) {
-        QuestionAdapter adapter = new QuestionAdapter(questions);
+        QuestionAdapter adapter = new QuestionAdapter(questions.get());
         mRecyclerView.setAdapter(adapter);
     }
 
