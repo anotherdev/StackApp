@@ -74,6 +74,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<ViewHolder> {
             qh.body.setText(mQuestion.getBody());
             qh.body.setVisibility(View.VISIBLE);
             qh.divider.setVisibility(View.VISIBLE);
+            qh.itemView.setOnClickListener(null);
         } else if (vh instanceof AnswerHolder) {
             AnswerHolder ah = (AnswerHolder) vh;
             final Answer a = mAnswers.get(position - 1);

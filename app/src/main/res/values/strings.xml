@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Stack App</string>
     <string name="loading_question">Loading Question</string>
+    <string name="search">Search</string>
 </resources>
