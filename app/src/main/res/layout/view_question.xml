@@ -35,8 +35,8 @@
             tools:text="Title"/>
 
         <RelativeLayout
+            android:layout_marginBottom="@dimen/default_half_spacing"
             android:layout_below="@id/question_title"
-            android:layout_above="@id/divider"
             android:layout_toRightOf="@id/question_owner_imageview"
             android:layout_alignParentRight="true"
             android:layout_width="match_parent"
