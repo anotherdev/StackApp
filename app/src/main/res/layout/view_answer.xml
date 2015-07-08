@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:padding="@dimen/default_half_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/answer_owner_imageview"
+            android:src="@drawable/ic_stack_app_launcher"
+            android:scaleType="centerCrop"
+            android:layout_margin="@dimen/default_half_spacing"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="@dimen/profile_image_size"
+            android:layout_height="@dimen/profile_image_size"/>
+
+        <TextView
+            android:id="@+id/answer_body"
+            android:gravity="top"
+            android:layout_margin="@dimen/default_half_spacing"
+            android:layout_toRightOf="@id/answer_owner_imageview"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Body"/>
+
+        <RelativeLayout
+            android:layout_marginBottom="@dimen/default_half_spacing"
+            android:layout_below="@id/answer_body"
+            android:layout_toRightOf="@id/answer_owner_imageview"
+            android:layout_alignParentRight="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/answer_time_ago"
+                android:gravity="bottom"
+                android:layout_margin="@dimen/default_half_spacing"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="9 years ago"/>
+
+            <TextView
+                android:id="@+id/answer_owner"
+                android:singleLine="true"
+                android:gravity="bottom"
+                android:layout_margin="@dimen/default_half_spacing"
+                android:layout_toLeftOf="@id/answer_time_ago"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Owner"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/view_divider"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+</LinearLayout>
