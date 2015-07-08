@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/question_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Title"/>
+
+    <TextView
+        android:id="@+id/question_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Owner"/>
+
+    <TextView
+        android:id="@+id/question_time_ago"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="9 years ago"/>
+
+    <include
+        layout="@layout/view_divider"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+</LinearLayout>
