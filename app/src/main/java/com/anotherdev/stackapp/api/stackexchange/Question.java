@@ -1,5 +1,7 @@
 package com.anotherdev.stackapp.api.stackexchange;
 
+import com.anotherdev.stackapp.util.Htmls;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class Question {
     long last_activity_date;
     long creation_date;
     String title;
+    String body;
 
 
     public String getId() {
@@ -53,7 +56,7 @@ public class Question {
         return creation_date;
     }
 
-    public String getTitle() {
-        return title;
+    public CharSequence getTitle() {
+        return Htmls.fromHtml(title);
     }
 }

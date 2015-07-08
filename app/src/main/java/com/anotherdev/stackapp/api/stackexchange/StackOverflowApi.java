@@ -9,9 +9,9 @@ public interface StackOverflowApi {
     String BASE_URL = "https://api.stackexchange.com/2.2";
 
 
-    @GET("/questions?order=desc&sort=activity&site=stackoverflow")
+    @GET("/questions?order=desc&sort=activity&site=stackoverflow&filter=withbody")
     Observable<Questions> questions();
 
-    @GET("/search?order=desc&sort=activity&site=stackoverflow")
+    @GET("/search?order=desc&sort=activity&site=stackoverflow&filter=withbody")
     Observable<Questions> search(@Query("intitle") String text);
 }
