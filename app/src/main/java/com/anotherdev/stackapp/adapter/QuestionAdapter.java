@@ -50,6 +50,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
         Glide.with(holder.itemView.getContext())
                 .load(owner.getProfileImage())
+                .placeholder(R.drawable.ic_stack_app_launcher)
                 .crossFade()
                 .into(holder.ownerImage);
 
