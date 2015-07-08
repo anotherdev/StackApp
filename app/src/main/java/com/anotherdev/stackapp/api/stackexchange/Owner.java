@@ -3,6 +3,9 @@ package com.anotherdev.stackapp.api.stackexchange;
 import com.anotherdev.stackapp.util.Htmls;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Owner {
 
     String user_id;
@@ -11,6 +14,8 @@ public class Owner {
     String display_name;
     @SerializedName("link") String profileUrl;
 
+
+    public Owner() {}
 
     public String getUserId() {
         return user_id;

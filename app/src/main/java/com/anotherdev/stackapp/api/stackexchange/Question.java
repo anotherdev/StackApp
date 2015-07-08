@@ -2,9 +2,12 @@ package com.anotherdev.stackapp.api.stackexchange;
 
 import com.anotherdev.stackapp.util.Htmls;
 
+import org.parceler.Parcel;
+
 import java.util.Collections;
 import java.util.List;
 
+@Parcel
 public class Question extends StackObject {
 
     String question_id;
@@ -14,6 +17,8 @@ public class Question extends StackObject {
     int answer_count;
     String title;
 
+
+    public Question() {}
 
     public String getId() {
         return question_id;
