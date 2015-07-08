@@ -1,6 +1,7 @@
 package com.anotherdev.stackapp.app;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +18,10 @@ import com.anotherdev.stackapp.rx.Actions;
 import butterknife.Bind;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Action1;
+
+import static android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 
 public class HomeActivity extends StackActivity {
 
@@ -25,7 +29,10 @@ public class HomeActivity extends StackActivity {
 
     private StackOverflowApi mStackOverflow;
 
+    @Bind(R.id.swipe_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
     @Bind(R.id.recyclerview) RecyclerView mRecyclerView;
+
+    private String mSearchText;
 
 
     @Override
@@ -34,10 +41,12 @@ public class HomeActivity extends StackActivity {
         ApiComponent apiComponent = DaggerApiComponent.create();
         mStackOverflow = apiComponent.stackoverflow();
 
+        mSwipeRefreshLayout.setOnRefreshListener(mOnRefreshListener);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        search("");
+        search(mSearchText);
     }
 
     @Override
@@ -61,7 +70,13 @@ public class HomeActivity extends StackActivity {
                                 updateQuestions(questions);
                             }
                         },
-                        mOnError);
+                        mOnError,
+                        new Action0() {
+                            @Override
+                            public void call() {
+                                mSwipeRefreshLayout.setRefreshing(false);
+                            }
+                        });
     }
 
     private void updateQuestions(Questions questions) {
@@ -70,5 +85,14 @@ public class HomeActivity extends StackActivity {
     }
 
 
-    private Action1<Throwable> mOnError = Actions.logError(TAG);
+    private final OnRefreshListener mOnRefreshListener = new OnRefreshListener() {
+
+        @Override
+        public void onRefresh() {
+            search(mSearchText);
+        }
+    };
+
+
+    private final Action1<Throwable> mOnError = Actions.logError(TAG);
 }
