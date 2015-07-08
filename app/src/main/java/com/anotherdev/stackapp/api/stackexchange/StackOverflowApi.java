@@ -1,6 +1,7 @@
 package com.anotherdev.stackapp.api.stackexchange;
 
 import retrofit.http.GET;
+import retrofit.http.Path;
 import retrofit.http.Query;
 import rx.Observable;
 
@@ -14,4 +15,8 @@ public interface StackOverflowApi {
 
     @GET("/search?order=desc&sort=activity&site=stackoverflow&filter=withbody")
     Observable<Questions> search(@Query("intitle") String text);
+
+
+    @GET("/questions/{question_id}/answers?order=desc&sort=votes&site=stackoverflow&filter=withbody")
+    Observable<Questions> answers(@Path("question_id") String questionId);
 }
