@@ -121,4 +121,7 @@ dependencies {
     compile 'com.squareup.retrofit:retrofit:1.9.0'
 
     compile 'io.reactivex:rxandroid:0.25.0'
+
+    compile "org.parceler:parceler-api:1.0.1"
+    apt "org.parceler:parceler:1.0.1"
 }
