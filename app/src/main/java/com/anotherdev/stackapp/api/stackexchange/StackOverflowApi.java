@@ -18,5 +18,5 @@ public interface StackOverflowApi {
 
 
     @GET("/questions/{question_id}/answers?order=desc&sort=votes&site=stackoverflow&filter=withbody")
-    Observable<Questions> answers(@Path("question_id") String questionId);
+    Observable<Answers> answers(@Path("question_id") String questionId);
 }
