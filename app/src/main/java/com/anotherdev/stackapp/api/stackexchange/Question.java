@@ -12,10 +12,7 @@ public class Question extends StackObject {
     boolean is_answered;
     int view_count;
     int answer_count;
-    long last_activity_date;
-    long creation_date;
     String title;
-    String body;
 
 
     public String getId() {
@@ -38,19 +35,7 @@ public class Question extends StackObject {
         return answer_count;
     }
 
-    public long getLastActivityDate() {
-        return last_activity_date;
-    }
-
-    public long getCreationDate() {
-        return creation_date;
-    }
-
     public CharSequence getTitle() {
         return Htmls.fromHtml(title);
-    }
-
-    public CharSequence getBody() {
-        return Htmls.fromHtml(body);
     }
 }
