@@ -10,14 +10,22 @@ import android.view.MenuItem;
 
 import com.anotherdev.stackapp.R;
 import com.anotherdev.stackapp.adapter.AnswerAdapter;
+import com.anotherdev.stackapp.api.ApiComponent;
+import com.anotherdev.stackapp.api.DaggerApiComponent;
 import com.anotherdev.stackapp.api.stackexchange.Answer;
+import com.anotherdev.stackapp.api.stackexchange.Answers;
 import com.anotherdev.stackapp.api.stackexchange.Question;
+import com.anotherdev.stackapp.api.stackexchange.StackOverflowApi;
 import com.anotherdev.stackapp.intent.DetailIntent;
 import com.google.common.collect.Lists;
 
 import butterknife.Bind;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 public class DetailActivity extends StackActivity {
+
+    private StackOverflowApi mStackOverflow;
 
     @Bind(R.id.recyclerview) RecyclerView mRecyclerView;
 
@@ -25,6 +33,8 @@ public class DetailActivity extends StackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ApiComponent apiComponent = DaggerApiComponent.create();
+        mStackOverflow = apiComponent.stackoverflow();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -32,6 +42,8 @@ public class DetailActivity extends StackActivity {
         Question q = DetailIntent.getQuestion(getIntent());
         AnswerAdapter adapter = new AnswerAdapter(q, Lists.<Answer>newArrayList());
         mRecyclerView.setAdapter(adapter);
+
+        loadAnswers(q);
     }
 
     @Override
@@ -52,5 +64,19 @@ public class DetailActivity extends StackActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadAnswers(final Question question) {
+        mStackOverflow.answers(question.getId())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        new Action1<Answers>() {
+                            @Override
+                            public void call(Answers answers) {
+                                AnswerAdapter adapter = new AnswerAdapter(question, answers.get());
+                                mRecyclerView.setAdapter(adapter);
+                            }
+                        }
+                );
     }
 }
