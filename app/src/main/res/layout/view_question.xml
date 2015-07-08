@@ -29,14 +29,24 @@
             android:layout_margin="@dimen/default_half_spacing"
             android:layout_toRightOf="@id/question_owner_imageview"
             android:layout_alignParentTop="true"
-            android:minHeight="32dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Title"/>
 
+        <TextView
+            android:id="@+id/question_body"
+            android:visibility="gone"
+            android:layout_margin="@dimen/default_half_spacing"
+            android:layout_below="@id/question_title"
+            android:layout_toRightOf="@id/question_owner_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Body"
+            tools:visibility="visible"/>
+
         <RelativeLayout
             android:layout_marginBottom="@dimen/default_half_spacing"
-            android:layout_below="@id/question_title"
+            android:layout_below="@id/question_body"
             android:layout_toRightOf="@id/question_owner_imageview"
             android:layout_alignParentRight="true"
             android:layout_width="match_parent"
