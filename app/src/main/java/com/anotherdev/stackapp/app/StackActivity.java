@@ -34,10 +34,19 @@ public abstract class StackActivity extends AppCompatActivity {
                 }
             }
         }
+
+        onInjectComponent(getApp());
     }
 
     @LayoutRes
     protected abstract int getActivityLayout();
 
     protected void setupSupportActionBar(@NonNull ActionBar actionBar) {}
+
+    protected abstract void onInjectComponent(@NonNull StackApp app);
+
+    @NonNull
+    protected StackApp getApp() {
+        return (StackApp) getApplication();
+    }
 }

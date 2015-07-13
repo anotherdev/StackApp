@@ -1,6 +1,7 @@
 package com.anotherdev.stackapp.api;
 
-import com.anotherdev.stackapp.api.stackexchange.StackOverflowApi;
+import com.anotherdev.stackapp.app.DetailActivity;
+import com.anotherdev.stackapp.app.HomeActivity;
 
 import javax.inject.Singleton;
 
@@ -12,5 +13,6 @@ import dagger.Component;
 })
 public interface ApiComponent {
 
-    StackOverflowApi stackoverflow();
+    void inject(HomeActivity activity);
+    void inject(DetailActivity activity);
 }

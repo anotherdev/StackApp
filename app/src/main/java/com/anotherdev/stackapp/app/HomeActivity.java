@@ -1,6 +1,7 @@
 package com.anotherdev.stackapp.app;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,12 +16,12 @@ import android.view.MenuItem;
 
 import com.anotherdev.stackapp.R;
 import com.anotherdev.stackapp.adapter.QuestionAdapter;
-import com.anotherdev.stackapp.api.ApiComponent;
-import com.anotherdev.stackapp.api.DaggerApiComponent;
 import com.anotherdev.stackapp.api.stackexchange.Questions;
 import com.anotherdev.stackapp.api.stackexchange.StackError;
 import com.anotherdev.stackapp.api.stackexchange.StackOverflowApi;
 import com.anotherdev.stackapp.util.Logger;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import retrofit.RetrofitError;
@@ -35,7 +36,7 @@ public class HomeActivity extends StackActivity {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
 
-    private StackOverflowApi mStackOverflow;
+    @Inject StackOverflowApi mStackOverflow;
 
     @Bind(R.id.swipe_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
     @Bind(R.id.recyclerview) RecyclerView mRecyclerView;
@@ -48,8 +49,6 @@ public class HomeActivity extends StackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ApiComponent apiComponent = DaggerApiComponent.create();
-        mStackOverflow = apiComponent.stackoverflow();
 
         mSwipeRefreshLayout.setOnRefreshListener(mOnRefreshListener);
 
@@ -62,6 +61,11 @@ public class HomeActivity extends StackActivity {
     @Override
     protected int getActivityLayout() {
         return R.layout.activity_home;
+    }
+
+    @Override
+    protected void onInjectComponent(@NonNull StackApp app) {
+        app.getApiComponent().inject(this);
     }
 
     @Override
