@@ -28,6 +28,7 @@ public class RxRealmCache {
                                 if (cache != null) {
                                     subscriber.onNext(cache);
                                 }
+                                realm.close();
                                 subscriber.onCompleted();
                             }
                         })
