@@ -152,7 +152,7 @@ public class HomeActivity extends StackActivity {
     }
 
     private void updateQuestions(Questions questions) {
-        QuestionAdapter adapter = new QuestionAdapter(questions.get());
+        QuestionAdapter adapter = new QuestionAdapter(questions.getQuestions());
         mRecyclerView.setAdapter(adapter);
     }
 

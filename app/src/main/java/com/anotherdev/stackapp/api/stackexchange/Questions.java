@@ -2,15 +2,19 @@ package com.anotherdev.stackapp.api.stackexchange;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Collections;
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
 
-public class Questions {
+public class Questions extends RealmObject {
 
-    @SerializedName("items") List<Question> questions = Collections.emptyList();
+    @SerializedName("items") private RealmList<Question> questions = new RealmList<>();
 
 
-    public List<Question> get() {
+    public RealmList<Question> getQuestions() {
         return questions;
+    }
+
+    public void setQuestions(RealmList<Question> q) {
+        questions = q;
     }
 }
