@@ -19,6 +19,7 @@ import com.anotherdev.stackapp.adapter.QuestionAdapter;
 import com.anotherdev.stackapp.api.stackexchange.Questions;
 import com.anotherdev.stackapp.api.stackexchange.StackError;
 import com.anotherdev.stackapp.api.stackexchange.StackOverflowApi;
+import com.anotherdev.stackapp.rx.RxRealmCache;
 import com.anotherdev.stackapp.util.Logger;
 
 import javax.inject.Inject;
@@ -121,6 +122,7 @@ public class HomeActivity extends StackActivity {
                         return new Questions();
                     }
                 })
+                .compose(RxRealmCache.<Questions>cache(this, Questions.class))
                 .subscribe(
                         new Action1<Questions>() {
                             @Override
