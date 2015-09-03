@@ -29,6 +29,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.functions.Func1;
 
 import static android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 
@@ -103,6 +104,8 @@ public class HomeActivity extends StackActivity {
     }
 
     private void search(final String text) {
+        setRefreshing(true);
+
         Observable<Questions> questions;
         if (TextUtils.isEmpty(text)) {
             questions = mStackOverflow.questions();
@@ -111,6 +114,13 @@ public class HomeActivity extends StackActivity {
         }
 
         questions.observeOn(AndroidSchedulers.mainThread())
+                .onErrorReturn(new Func1<Throwable, Questions>() {
+                    @Override
+                    public Questions call(Throwable t) {
+                        showError(t);
+                        return new Questions();
+                    }
+                })
                 .subscribe(
                         new Action1<Questions>() {
                             @Override
@@ -120,36 +130,23 @@ public class HomeActivity extends StackActivity {
                         },
                         new Action1<Throwable>() {
                             @Override
-                            public void call(Throwable e) {
-                                mSwipeRefreshLayout.setRefreshing(false);
-                                Logger.e(TAG, "", e);
-                                String msg = e.getMessage();
-                                if (e instanceof RetrofitError) {
-                                    RetrofitError re = (RetrofitError) e;
-                                    StackError se = (StackError) re.getBodyAs(StackError.class);
-                                    StringBuilder sb = new StringBuilder();
-                                    sb.append(se.getId())
-                                            .append(" ")
-                                            .append(se.getName())
-                                            .append("\n")
-                                            .append(se.getMessage());
-                                    msg = sb.toString();
-                                }
-                                Snackbar.make(mRecyclerView, msg, Snackbar.LENGTH_LONG)
-                                        .show();
+                            public void call(Throwable t) {
+                                showError(t);
                             }
                         },
                         new Action0() {
                             @Override
                             public void call() {
-                                mSwipeRefreshLayout.setRefreshing(false);
+                                setRefreshing(false);
                             }
                         });
+    }
 
+    private void setRefreshing(final boolean refreshing) {
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                mSwipeRefreshLayout.setRefreshing(true);
+                mSwipeRefreshLayout.setRefreshing(refreshing);
             }
         });
     }
@@ -157,6 +154,25 @@ public class HomeActivity extends StackActivity {
     private void updateQuestions(Questions questions) {
         QuestionAdapter adapter = new QuestionAdapter(questions.get());
         mRecyclerView.setAdapter(adapter);
+    }
+
+    private void showError(Throwable t) {
+        setRefreshing(false);
+        Logger.e(TAG, "", t);
+        String msg = t.getMessage();
+        if (t instanceof RetrofitError) {
+            RetrofitError re = (RetrofitError) t;
+            StackError se = (StackError) re.getBodyAs(StackError.class);
+            StringBuilder sb = new StringBuilder();
+            sb.append(se.getId())
+                    .append(" ")
+                    .append(se.getName())
+                    .append("\n")
+                    .append(se.getMessage());
+            msg = sb.toString();
+        }
+        Snackbar.make(mRecyclerView, msg, Snackbar.LENGTH_LONG)
+                .show();
     }
 
 
