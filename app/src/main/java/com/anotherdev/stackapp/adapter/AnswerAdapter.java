@@ -12,6 +12,7 @@ import com.anotherdev.stackapp.api.stackexchange.Answer;
 import com.anotherdev.stackapp.api.stackexchange.Owner;
 import com.anotherdev.stackapp.api.stackexchange.Question;
 import com.anotherdev.stackapp.util.Dates;
+import com.anotherdev.stackapp.util.Htmls;
 import com.bumptech.glide.Glide;
 
 import java.util.Collections;
@@ -71,7 +72,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<ViewHolder> {
         if (vh instanceof QuestionHolder) {
             QuestionHolder qh = (QuestionHolder) vh;
             mQuestionAdapter.onBindViewHolder(qh, position);
-            qh.body.setText(mQuestion.getBody());
+            qh.body.setText(Htmls.fromHtml(mQuestion.getBody()));
             qh.body.setVisibility(View.VISIBLE);
             qh.divider.setVisibility(View.VISIBLE);
             qh.itemView.setOnClickListener(null);
@@ -86,8 +87,8 @@ public class AnswerAdapter extends RecyclerView.Adapter<ViewHolder> {
                     .crossFade()
                     .into(ah.ownerImage);
 
-            ah.body.setText(a.getBody());
-            ah.owner.setText(owner.getDisplayName());
+            ah.body.setText(Htmls.fromHtml(a.getBody()));
+            ah.owner.setText(Htmls.fromHtml(owner.getDisplayName()));
             ah.timeAgo.setText(Dates.getTimeAgo(a.getLastActivityDate()));
             ah.divider.setVisibility(View.VISIBLE);
         }

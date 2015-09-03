@@ -1,27 +1,30 @@
 package com.anotherdev.stackapp.api.stackexchange;
 
-import com.anotherdev.stackapp.util.Htmls;
+import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
-import java.util.Collections;
-import java.util.List;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-@Parcel
-public class Question {
+@Parcel(
+        //implementations = { QuestionRealmProxy.class },
+        value = Parcel.Serialization.BEAN,
+        analyze = { Question.class }
+)
+public class Question extends RealmObject {
 
-    Owner owner;
-    int score;
-    long last_activity_date;
-    long creation_date;
-    String body;
+    @SerializedName("owner") private Owner owner;
+    @SerializedName("score") private int score;
+    @SerializedName("last_activity_date") private long lastActivityDate;
+    @SerializedName("creation_date") private long creationDate;
+    @SerializedName("body") private String body;
 
-    String question_id;
-    List<String> tags = Collections.emptyList();
-    boolean is_answered;
-    int view_count;
-    int answer_count;
-    String title;
+    @SerializedName("question_id") @PrimaryKey private String questionId;
+    @SerializedName("is_answered") private boolean isAnswered;
+    @SerializedName("view_count") private int viewCount;
+    @SerializedName("answer_count") private int answerCount;
+    @SerializedName("title") private String title;
 
 
     public Question() {}
@@ -30,43 +33,79 @@ public class Question {
         return owner;
     }
 
+    public void setOwner(Owner o) {
+        owner = o;
+    }
+
     public int getScore() {
         return score;
     }
 
+    public void setScore(int s) {
+        score = s;
+    }
+
     public long getLastActivityDate() {
-        return last_activity_date;
+        return lastActivityDate;
+    }
+
+    public void setLastActivityDate(long date) {
+        lastActivityDate = date;
     }
 
     public long getCreationDate() {
-        return creation_date;
+        return creationDate;
     }
 
-    public CharSequence getBody() {
-        return Htmls.fromHtml(body);
+    public void setCreationDate(long date) {
+        creationDate = date;
     }
 
-    public String getId() {
-        return question_id;
+    public String getBody() {
+        return body;
     }
 
-    public List<String> getTags() {
-        return tags;
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
     }
 
     public boolean isAnswered() {
-        return is_answered;
+        return isAnswered;
+    }
+
+    public void setIsAnswered(boolean answered) {
+        isAnswered = answered;
     }
 
     public int getViewCount() {
-        return view_count;
+        return viewCount;
+    }
+
+    public void setViewCount(int count) {
+        viewCount = count;
     }
 
     public int getAnswerCount() {
-        return answer_count;
+        return answerCount;
     }
 
-    public CharSequence getTitle() {
-        return Htmls.fromHtml(title);
+    public void setAnswerCount(int count) {
+        answerCount = count;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String text) {
+        title = text;
     }
 }

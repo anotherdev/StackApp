@@ -71,7 +71,7 @@ public class DetailActivity extends StackActivity {
     }
 
     private void loadAnswers(final Question question) {
-        mStackOverflow.answers(question.getId())
+        mStackOverflow.answers(question.getQuestionId())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         new Action1<Answers>() {

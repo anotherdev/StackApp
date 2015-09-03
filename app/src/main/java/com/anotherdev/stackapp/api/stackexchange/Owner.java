@@ -1,39 +1,66 @@
 package com.anotherdev.stackapp.api.stackexchange;
 
-import com.anotherdev.stackapp.util.Htmls;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
-@Parcel
-public class Owner {
+import io.realm.OwnerRealmProxy;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-    String user_id;
-    int reputation;
-    String profile_image;
-    String display_name;
-    @SerializedName("link") String profileUrl;
+@Parcel(
+        implementations = { OwnerRealmProxy.class },
+        value = Parcel.Serialization.BEAN,
+        analyze = { Owner.class }
+)
+public class Owner extends RealmObject {
+
+    @SerializedName("user_id") @PrimaryKey private String userId;
+    @SerializedName("reputation") private int reputation;
+    @SerializedName("profile_image") private String profileImage;
+    @SerializedName("display_name") private String displayName;
+    @SerializedName("link") private String profileUrl;
 
 
     public Owner() {}
 
     public String getUserId() {
-        return user_id;
+        return userId;
+    }
+
+    public void setUserId(String id) {
+        userId = id;
     }
 
     public int getReputation() {
         return reputation;
     }
 
-    public String getProfileImage() {
-        return profile_image;
+    public void setReputation(int rep) {
+        reputation = rep;
     }
 
-    public CharSequence getDisplayName() {
-        return Htmls.fromHtml(display_name);
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String imageUrl) {
+        profileImage = imageUrl;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String name) {
+        displayName = name;
     }
 
     public String getProfileUrl() {
         return profileUrl;
+    }
+
+    public void setProfileUrl(String url) {
+        profileUrl = url;
     }
 }

@@ -1,18 +1,29 @@
 package com.anotherdev.stackapp.api.stackexchange;
 
-import com.anotherdev.stackapp.util.Htmls;
+import com.google.gson.annotations.SerializedName;
 
-public class Answer {
+import org.parceler.Parcel;
 
-    Owner owner;
-    int score;
-    long last_activity_date;
-    long creation_date;
-    String body;
+import io.realm.AnswerRealmProxy;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-    String answer_id;
-    boolean is_accepted;
-    String question_id;
+@Parcel(
+        implementations = { AnswerRealmProxy.class },
+        value = Parcel.Serialization.BEAN,
+        analyze = { Answer.class }
+)
+public class Answer extends RealmObject {
+
+    @SerializedName("owner") private Owner owner;
+    @SerializedName("score") private int score;
+    @SerializedName("last_activity_date") private long lastActivityDate;
+    @SerializedName("creation_date") private long creationDate;
+    @SerializedName("body") private String body;
+
+    @SerializedName("answer_id") @PrimaryKey private String answerId;
+    @SerializedName("is_accepted") private boolean isAccepted;
+    @SerializedName("question_id") private String questionId;
 
 
     public Answer() {}
@@ -21,31 +32,63 @@ public class Answer {
         return owner;
     }
 
+    public void setOwner(Owner o) {
+        owner = o;
+    }
+
     public int getScore() {
         return score;
     }
 
+    public void setScore(int s) {
+        score = s;
+    }
+
     public long getLastActivityDate() {
-        return last_activity_date;
+        return lastActivityDate;
+    }
+
+    public void setLastActivityDate(long date) {
+        lastActivityDate = date;
     }
 
     public long getCreationDate() {
-        return creation_date;
+        return creationDate;
     }
 
-    public CharSequence getBody() {
-        return Htmls.fromHtml(body);
+    public void setCreationDate(long date) {
+        creationDate = date;
     }
 
-    public String getId() {
-        return answer_id;
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getAnswerId() {
+        return answerId;
+    }
+
+    public void setAnswerId(String id) {
+        answerId = id;
     }
 
     public boolean isAccepted() {
-        return is_accepted;
+        return isAccepted;
+    }
+
+    public void setIsAccepted(boolean accepted) {
+        isAccepted = accepted;
     }
 
     public String getQuestionId() {
-        return question_id;
+        return questionId;
+    }
+
+    public void setQuestionId(String id) {
+        questionId = id;
     }
 }

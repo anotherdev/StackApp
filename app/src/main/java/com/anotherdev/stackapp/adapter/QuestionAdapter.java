@@ -13,6 +13,7 @@ import com.anotherdev.stackapp.api.stackexchange.Owner;
 import com.anotherdev.stackapp.api.stackexchange.Question;
 import com.anotherdev.stackapp.intent.DetailIntent;
 import com.anotherdev.stackapp.util.Dates;
+import com.anotherdev.stackapp.util.Htmls;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -54,8 +55,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
                 .crossFade()
                 .into(holder.ownerImage);
 
-        holder.title.setText(q.getTitle());
-        holder.owner.setText(owner.getDisplayName());
+        holder.title.setText(Htmls.fromHtml(q.getTitle()));
+        holder.owner.setText(Htmls.fromHtml(owner.getDisplayName()));
         holder.timeAgo.setText(Dates.getTimeAgo(q.getLastActivityDate()));
 
         final boolean isLastPosition = position == (getItemCount() - 1);
