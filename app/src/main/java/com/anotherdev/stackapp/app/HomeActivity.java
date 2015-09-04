@@ -122,7 +122,7 @@ public class HomeActivity extends StackActivity {
                         return new Questions();
                     }
                 })
-                .compose(RxRealmCache.<Questions>cache(this, Questions.class))
+                .compose(RxRealmCache.cache(Questions.class))
                 .subscribe(
                         new Action1<Questions>() {
                             @Override

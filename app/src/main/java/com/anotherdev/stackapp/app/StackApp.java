@@ -7,6 +7,8 @@ import com.anotherdev.stackapp.api.DaggerApiComponent;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class StackApp extends Application {
 
@@ -17,10 +19,16 @@ public class StackApp extends Application {
     public void onCreate() {
         super.onCreate();
         initFabric();
+        initRealm();
     }
 
     private void initFabric() {
         Fabric.with(this, new Crashlytics());
+    }
+
+    private void initRealm() {
+        RealmConfiguration config = new RealmConfiguration.Builder(this).build();
+        Realm.setDefaultConfiguration(config);
     }
 
     public ApiComponent getApiComponent() {
