@@ -15,6 +15,7 @@ import com.anotherdev.stackapp.api.stackexchange.Answers;
 import com.anotherdev.stackapp.api.stackexchange.Question;
 import com.anotherdev.stackapp.api.stackexchange.StackOverflowApi;
 import com.anotherdev.stackapp.intent.DetailIntent;
+import com.anotherdev.stackapp.rx.Errors;
 import com.google.common.collect.Lists;
 
 import javax.inject.Inject;
@@ -24,6 +25,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
 public class DetailActivity extends StackActivity {
+
+    private static final String TAG = DetailActivity.class.getSimpleName();
 
     @Inject StackOverflowApi mStackOverflow;
 
@@ -72,6 +75,7 @@ public class DetailActivity extends StackActivity {
 
     private void loadAnswers(final Question question) {
         mStackOverflow.answers(question.getQuestionId())
+                .onErrorReturn(Errors.log(TAG, new Answers()))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         new Action1<Answers>() {
