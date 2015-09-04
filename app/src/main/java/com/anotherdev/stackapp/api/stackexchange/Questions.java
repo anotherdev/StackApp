@@ -8,7 +8,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class Questions extends RealmObject {
 
-    @PrimaryKey private final String id = "questions";
+    @PrimaryKey private final String id = Questions.class.getName();
     @SerializedName("items") private RealmList<Question> questions = new RealmList<>();
 
 
