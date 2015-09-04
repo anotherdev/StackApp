@@ -81,7 +81,7 @@ public class DetailActivity extends StackActivity {
                         new Action1<Answers>() {
                             @Override
                             public void call(Answers answers) {
-                                AnswerAdapter adapter = new AnswerAdapter(question, answers.get());
+                                AnswerAdapter adapter = new AnswerAdapter(question, answers.getAnswers());
                                 mRecyclerView.setAdapter(adapter);
                             }
                         }
