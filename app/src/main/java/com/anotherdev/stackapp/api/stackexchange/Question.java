@@ -4,11 +4,12 @@ import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
+import io.realm.QuestionRealmProxy;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 @Parcel(
-        //implementations = { QuestionRealmProxy.class },
+        implementations = { QuestionRealmProxy.class },
         value = Parcel.Serialization.BEAN,
         analyze = { Question.class }
 )
