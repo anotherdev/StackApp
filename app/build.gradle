@@ -124,7 +124,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'io.reactivex:rxjava:1.0.14'
 
-    compile 'io.realm:realm-android:0.82.1'
+    compile 'io.realm:realm-android:0.82.2'
 
     compile "org.parceler:parceler-api:1.0.1"
     apt "org.parceler:parceler:1.0.1"
