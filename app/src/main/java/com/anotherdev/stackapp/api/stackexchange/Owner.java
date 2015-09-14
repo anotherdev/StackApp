@@ -15,7 +15,7 @@ import io.realm.annotations.PrimaryKey;
 )
 public class Owner extends RealmObject {
 
-    @SerializedName("user_id") @PrimaryKey private String userId;
+    @SerializedName("user_id") @PrimaryKey private String userId = "";
     @SerializedName("reputation") private int reputation;
     @SerializedName("profile_image") private String profileImage;
     @SerializedName("display_name") private String displayName;
