@@ -1,8 +1,8 @@
 // Version
 def versionMajor = 0
 def versionMinor = 0 // [0-9] minor feature releases
-def versionPatch = 0 // [0-9] This should be bumped for hot fixes
-def versionBuild = 1 // [0-99] bump for dogfood builds, public betas, etc.
+def versionPatch = 1 // [0-9] This should be bumped for hot fixes
+def versionBuild = 0 // [0-99] bump for dogfood builds, public betas, etc.
 
 // Double check the versioning
 assert 0 <= versionMajor
